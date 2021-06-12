@@ -1,0 +1,44 @@
+$accent-color: #A244FF;
+
+.root {
+  width: 16rem;
+  margin: 2rem 1rem;
+  text-align: left;
+}
+
+.image {
+  width: 16rem;
+  height: 25rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.4rem 0.8rem rgba(255,255,255,0.25);
+  border: 0.1rem solid white;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.rating {
+  color: $accent-color;
+}
+
+.svg {
+  margin: 0 0.1rem;
+
+  &:first-of-type,
+  &:last-of-type {
+    margin: 0;
+  }
+}
+
+.year {
+  font-size: 1.6rem;
+  margin: 0.5rem 0;
+}
