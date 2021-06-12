@@ -3,7 +3,6 @@ import styles from './App.module.scss'
 import { BrowserRouter as Router } from 'react-router-dom'
 import BaseRoutes from '../../router/routes/BaseRoutes'
 import GlobalLoader from '../../modules/GlobalLoader/GlobalLoader'
-import TopBar from '../../modules/TopBar/TopBar'
 
 const App = () => {
   return (

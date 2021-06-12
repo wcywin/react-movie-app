@@ -37,7 +37,7 @@ const SearchView: React.FC<SearchViewProps> = ({
         // @ts-ignore
         setIsLoadingAction(false)
       })})();
-  }, []);
+  }, [setIsLoadingAction, setSearchedMoviesAction]);
 
   return (
     <>
