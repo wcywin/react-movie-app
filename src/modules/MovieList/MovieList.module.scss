@@ -1,4 +1,11 @@
+@import './src/styles/variables';
+
 .root {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
+
+  @media #{$tablet-768-up} {
+    justify-content: flex-start;
+  }
 }

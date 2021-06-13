@@ -7,7 +7,8 @@ import {URL_MAIN} from '../../contants/ulrs'
 const BaseRoutes = () => (
   <Switch>
     <Route exact path={URL_MAIN.search} component={SearchView} />
-    <Route exact path={URL_MAIN.movieDetails} component={MovieDetailsView} />
+    {/*<Route exact path={URL_MAIN.movieDetails} component={MovieDetailsView} />*/}
+    <Route exact path={'/movie/:id/details/:slug'} component={MovieDetailsView} />
   </Switch>
 )
 

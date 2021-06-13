@@ -1,4 +1,4 @@
 export const URL_MAIN = {
   search: '/',
-  movieDetails: '/:slug',
+  movieDetails: '/movie/:id/details/:slug',
 }

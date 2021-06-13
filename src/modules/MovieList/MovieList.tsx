@@ -17,6 +17,8 @@ const MovieList: React.FC<MovieListProps> = ({
             // @ts-ignore
             key={movie.imdbID}
             // @ts-ignore
+            id={movie.imdbID}
+            // @ts-ignore
             posterUrl={movie.Poster}
             // @ts-ignore
             title={movie.Title}

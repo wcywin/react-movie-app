@@ -11,6 +11,7 @@ const TopBar = () => {
         <Logo />
       </div>
       <div className={styles.search}>
+        {/*// @ts-ignore*/}
         <SearchInput />
       </div>
       <div className={styles.navLinks} />

@@ -1,0 +1,56 @@
+@import './src/styles/variables';
+
+.root {
+  color: $white;
+}
+
+.topWrapper {
+  display: flex;
+  align-items: center;
+  //background-color: $accent-color;
+}
+
+.details {
+  flex: 1;
+  height: 100%;
+  //background-color: green;
+}
+
+.year {
+  font-size: 1.8rem;
+}
+
+.rating {
+  color: $accent-color;
+}
+
+.svg {
+  margin: 0 0.1rem;
+
+  &:first-of-type,
+  &:last-of-type {
+    margin: 0;
+  }
+}
+
+.title {
+  font-size: 4.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.actors {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.posterContainer {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  //background-color: orangered;
+}
+
+.poster {
+}

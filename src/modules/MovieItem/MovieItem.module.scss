@@ -1,23 +1,41 @@
-$accent-color: #A244FF;
+@import './src/styles/variables';
 
 .root {
-  width: 16rem;
+  width: 13rem;
   margin: 2rem 1rem;
   text-align: left;
+
+  @media #{$tablet-768-up} {
+    width: 15rem;
+  }
+
+  @media #{$desktop-1024-up} {
+    width: 16rem;
+  }
 }
 
 .image {
-  width: 16rem;
-  height: 25rem;
+  width: 13rem;
+  height: 22rem;
   border-radius: 1rem;
-  box-shadow: 0 0.4rem 0.8rem rgba(255,255,255,0.25);
-  border: 0.1rem solid white;
+  box-shadow: 0 0.4rem 0.8rem $box-shadow-white-25;
+  border: 0.1rem solid $white;
   cursor: pointer;
+
+  @media #{$tablet-768-up} {
+    width: 15rem;
+    height: 24rem;
+  }
+
+  @media #{$desktop-1024-up} {
+    width: 16rem;
+    height: 25rem;
+  }
 }
 
 .title {
   font-size: 1.8rem;
-  color: white;
+  color: $white;
   cursor: pointer;
 
   &:hover {

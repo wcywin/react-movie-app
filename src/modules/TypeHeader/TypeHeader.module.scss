@@ -1,28 +1,56 @@
-$accent-color: #A244FF;
+@import './src/styles/variables';
 
 .root {
-  display: block;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   margin: 2rem 0;
+
+  @media #{$tablet-768-up} {
+    display: block;
+    text-align: left;
+  }
 
   &:before {
     content: '';
     position: absolute;
-    left: -1.5rem;
-    top: 1.5rem;
-    width: 0.3rem;
-    height: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -1.5rem;
+    width: 5rem;
+    height: 0.3rem;
     background-color: $accent-color;
     z-index: 1;
+
+    @media #{$tablet-768-up} {
+      left: -1.2rem;
+      top: 1.5rem;
+      width: 0.3rem;
+      height: 80%;
+    }
+
+    @media #{$desktop-1024-up} {
+      left: -1.5rem;
+    }
   }
 }
 
 .title {
-  font-size: 4.6rem;
+  font-size: 3.2rem;
   font-weight: 700;
   margin: 0;
+
+  @media #{$tablet-768-up} {
+    font-size: 4.6rem;
+  }
 }
 
 .subtitle {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
+
+  @media #{$tablet-768-up} {
+    font-size: 1.6rem;
+  }
 }

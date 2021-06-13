@@ -2,32 +2,53 @@ import React, {Dispatch, useState} from 'react'
 import { connect } from 'react-redux'
 import styles from './SearchInput.module.scss'
 import { setIsLoading } from '../../store/reducers/commonSlice/commonSlice'
-import { setSearchedMovies } from '../../store/reducers/appSlice/appSlice'
+import {
+  setLastSearchedQuery,
+  setPageNumber,
+  setSearchedMovies,
+  setTotalResults,
+} from '../../store/reducers/appSlice/appSlice'
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit'
-import getMovieWithQuery from '../../utils/getMovieWithQuery'
+import getMoviesWithQuery from '../../utils/getMoviesWithQuery'
 import Svg from '../../components/Svg/Svg'
-import {iconSearch} from '../../assets/svg/svg'
+import { iconSearch } from '../../assets/svg/svg'
 
 interface SearchInputDispatchProps {
+  pageNumber: number,
   setIsLoadingAction: Dispatch<ActionCreatorWithPayload<boolean>>,
+  setLastSearchedQueryAction: Dispatch<ActionCreatorWithPayload<string>>,
+  setPageNumberAction: Dispatch<ActionCreatorWithPayload<number>>
   setSearchedMoviesAction: Dispatch<ActionCreatorWithPayload<object[]>>
+  setTotalResultsAction: Dispatch<ActionCreatorWithPayload<object[]>>
 }
 
 const SearchInput: React.FC<SearchInputDispatchProps> = ({
+  pageNumber,
   setIsLoadingAction,
+  setLastSearchedQueryAction,
+  setPageNumberAction,
   setSearchedMoviesAction,
+  setTotalResultsAction,
 }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log(searchTerm, 'searchTerm')
+    if (!searchTerm) {
+      return
+    }
+
     // @ts-ignore
     setIsLoadingAction(true)
-    await getMovieWithQuery(searchTerm)
+    // @ts-ignore
+    setLastSearchedQueryAction(searchTerm)
+    // @ts-ignore
+    setPageNumberAction(1)
+
+    await getMoviesWithQuery(searchTerm, pageNumber)
       .then(({ data }) => {
-        console.log(data.Search, 'data.Search');
-        setSearchedMoviesAction(data.Search);
+        setSearchedMoviesAction(data.Search)
+        setTotalResultsAction(data.totalResults)
       })
       .finally(() =>  {
         // @ts-ignore
@@ -62,9 +83,19 @@ const SearchInput: React.FC<SearchInputDispatchProps> = ({
   )
 }
 
+const mapStateToProps = ({
+  // @ts-ignore
+  app,
+}) => ({
+  pageNumber: app.pageNumber,
+})
+
 const mapsDispatchToProps = {
-  setSearchedMoviesAction: setSearchedMovies,
   setIsLoadingAction: setIsLoading,
+  setLastSearchedQueryAction: setLastSearchedQuery,
+  setPageNumberAction: setPageNumber,
+  setSearchedMoviesAction: setSearchedMovies,
+  setTotalResultsAction: setTotalResults,
 }
 
-export default connect(null, mapsDispatchToProps)(SearchInput)
+export default connect(mapStateToProps, mapsDispatchToProps)(SearchInput)

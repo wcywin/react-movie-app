@@ -1,13 +1,12 @@
-$accent-color: #A244FF;
-$placeholder-color: #676767;
-$black: #000;
+@import './src/styles/variables';
 
 .root {
   position: relative;
+  width: 100%;
 }
 
 .input {
-  width: 33rem;
+  width: 100%;
   height: 4rem;
   border: 0.1rem solid $accent-color;
   border-radius: 2.5rem;
@@ -16,15 +15,24 @@ $black: #000;
   font-weight: 300;
   outline: none;
   background-color: transparent;
-  padding: 0.4rem 2rem 0.4rem 5rem;
+  padding: 0.2rem 2rem 0.2rem 5rem;
 
   &::placeholder {
-    color: $placeholder-color;
+    color: $grey;
   }
 
   &:focus,
   &:active {
     border: 0.1rem solid $accent-color;
+  }
+
+  @media #{$tablet-768-up} {
+    width: 28rem;
+    padding: 0.4rem 2rem 0.4rem 5rem;
+  }
+
+  @media #{$desktop-1024-up} {
+    width: 33rem;
   }
 }
 
@@ -33,5 +41,5 @@ $black: #000;
   top: 50%;
   left: 2rem;
   transform: translateY(-50%);
-  color: $placeholder-color;
+  color: $grey;
 }
