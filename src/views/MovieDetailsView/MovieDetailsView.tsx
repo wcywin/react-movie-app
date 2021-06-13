@@ -36,52 +36,57 @@ const MovieDetailsView: React.FC<MovieDetailsViewDispatchProps> = ({
         // @ts-ignore
         .finally(() => setIsLoadingAction(false))
     })()
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [
+    id,
+    setIsLoadingAction,
+    setMovieDetailsAction,
+  ])
 
-  console.log(movieDetails, 'movieDetails')
-
-  // @ts-ignore
   return (
-    <div className={styles.root}>
-      <div className={styles.topWrapper}>
-        <div className={styles.details}>
-          <div className={styles.year}>
-            {/*// @ts-ignore*/}
-            {movieDetails.Year}
-          </div>
-          <div className={styles.rating}>
-            {starsArray.map(index => (
-              <Svg
-                key={index}
-                icon={iconStar}
-                size={1.6}
-                svgClassName={styles.svg}
+    <>
+      {movieDetails && (
+        <div className={styles.root}>
+          <div className={styles.topWrapper}>
+            <div className={styles.details}>
+              <div className={styles.year}>
+                {/*// @ts-ignore*/}
+                {movieDetails.Year}
+              </div>
+              <div className={styles.rating}>
+                {starsArray.map(index => (
+                  <Svg
+                    key={index}
+                    icon={iconStar}
+                    size={1.6}
+                    svgClassName={styles.svg}
+                  />
+                ))}
+              </div>
+              <div className={styles.title}>
+                {/*// @ts-ignore*/}
+                {movieDetails.Title}
+              </div>
+              <div className={styles.actors}>
+                {/*// @ts-ignore*/}
+                {movieDetails.Actors}
+              </div>
+              <BaseButton>
+                Oglądaj
+              </BaseButton>
+            </div>
+            <div className={styles.posterContainer}>
+              <img
+                className={styles.poster}
+                // @ts-ignore
+                src={movieDetails.Poster}
+                // @ts-ignore
+                alt={movieDetails.Title}
               />
-            ))}
+            </div>
           </div>
-          <div className={styles.title}>
-            {/*// @ts-ignore*/}
-            {movieDetails.Title}
-          </div>
-          <div className={styles.actors}>
-            {/*// @ts-ignore*/}
-            {movieDetails.Actors}
-          </div>
-          <BaseButton>
-            Oglądaj
-          </BaseButton>
         </div>
-        <div className={styles.posterContainer}>
-          <img
-            className={styles.poster}
-            // @ts-ignore
-            src={movieDetails.Poster}
-            // @ts-ignore
-            alt={movieDetails.Title}
-          />
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   )
 }
 
