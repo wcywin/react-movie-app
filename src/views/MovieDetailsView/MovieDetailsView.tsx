@@ -9,10 +9,13 @@ import getMovieDetails from '../../utils/getMovieDetails'
 import styles from './MovieDetailsView.module.scss'
 import Svg from '../../components/Svg/Svg'
 import { iconStar } from '../../assets/svg/svg'
-import BaseButton from '../../components/Button/BaseButton'
+import BaseButton from '../../components/Button/Button'
+import TopBar from '../../modules/TopBar/TopBar'
+import { MovieDetails } from '../../types'
+import TypeHeader from '../../modules/TypeHeader/TypeHeader'
 
 interface MovieDetailsViewDispatchProps {
-  movieDetails: object,
+  movieDetails: MovieDetails,
   setIsLoadingAction: Dispatch<ActionCreatorWithPayload<boolean>>,
   setMovieDetailsAction: Dispatch<ActionCreatorWithPayload<object>>,
 }
@@ -28,16 +31,19 @@ const MovieDetailsView: React.FC<MovieDetailsViewDispatchProps> = ({
   const { id } = useParams()
 
   useEffect(() => {
-    (async () => {
-      // @ts-ignore
-      setIsLoadingAction(true)
-      await getMovieDetails(id)
-        .then(({ data }) => setMovieDetailsAction(data))
+    if (id !== (movieDetails && movieDetails.imdbID)) {
+      (async () => {
         // @ts-ignore
-        .finally(() => setIsLoadingAction(false))
-    })()
+        setIsLoadingAction(true)
+        await getMovieDetails(id)
+          .then(({data}) => setMovieDetailsAction(data))
+          // @ts-ignore
+          .finally(() => setIsLoadingAction(false))
+      })()
+    }
   }, [
     id,
+    movieDetails,
     setIsLoadingAction,
     setMovieDetailsAction,
   ])
@@ -45,46 +51,73 @@ const MovieDetailsView: React.FC<MovieDetailsViewDispatchProps> = ({
   return (
     <>
       {movieDetails && (
-        <div className={styles.root}>
-          <div className={styles.topWrapper}>
-            <div className={styles.details}>
-              <div className={styles.year}>
-                {/*// @ts-ignore*/}
-                {movieDetails.Year}
+        <>
+          <TopBar isMovieDetails />
+          <div className={styles.root}>
+            <div className={styles.topWrapper}>
+              <div className={styles.details}>
+                <div className={styles.year}>
+                  {movieDetails.Year}, {movieDetails.Genre}
+                </div>
+                <div className={styles.stars}>
+                  {starsArray.map(index => (
+                    <Svg
+                      key={index}
+                      icon={iconStar}
+                      size={1.6}
+                      svgClassName={styles.svg}
+                    />
+                  ))}
+                </div>
+                <div className={styles.title}>
+                  {movieDetails.Title}
+                </div>
+                <div className={styles.actors}>
+                  {movieDetails.Actors}
+                </div>
+                <BaseButton>
+                  Watch
+                </BaseButton>
               </div>
-              <div className={styles.rating}>
-                {starsArray.map(index => (
-                  <Svg
-                    key={index}
-                    icon={iconStar}
-                    size={1.6}
-                    svgClassName={styles.svg}
-                  />
-                ))}
+              <div className={styles.posterContainer}>
+                <img
+                  className={styles.poster}
+                  src={movieDetails.Poster}
+                  alt={movieDetails.Title}
+                />
               </div>
-              <div className={styles.title}>
-                {/*// @ts-ignore*/}
-                {movieDetails.Title}
-              </div>
-              <div className={styles.actors}>
-                {/*// @ts-ignore*/}
-                {movieDetails.Actors}
-              </div>
-              <BaseButton>
-                Oglądaj
-              </BaseButton>
             </div>
-            <div className={styles.posterContainer}>
-              <img
-                className={styles.poster}
-                // @ts-ignore
-                src={movieDetails.Poster}
-                // @ts-ignore
-                alt={movieDetails.Title}
-              />
+            <TypeHeader title="Movie Details" />
+            <div className={styles.plot}>
+              {movieDetails.Plot}
+            </div>
+            <div className={styles.released}>
+              Released: {movieDetails.Released}
+            </div>
+            <div className={styles.duration}>
+              Duration: <span>{movieDetails.Runtime}</span>
+            </div>
+            <TypeHeader title="Awards" />
+            <div className={styles.awards}>
+              {movieDetails.Awards}
+            </div>
+            <div className={styles.ratings}>
+              {movieDetails.Ratings.map(({ Value, Source }) => (
+                <div className={styles.rating}>
+                  <div className={styles.ratingValue}>
+                    {Value}
+                  </div>
+                  <div className={styles.ratingSource}>
+                    {Source}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className={styles.footer}>
+              {new Date().getFullYear()} Copyright &copy; Anastasiia Movie App
             </div>
           </div>
-        </div>
+        </>
       )}
     </>
   )

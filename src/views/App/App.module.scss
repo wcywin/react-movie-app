@@ -38,7 +38,7 @@ code {
 }
 
 .container {
-  max-width: calc(100% - 6rem);
+  max-width: calc(100% - 4rem);
   margin: 0 auto;
 
   @media #{$tablet-768-up} {

@@ -12,7 +12,9 @@ import getMoviesWithQuery from '../../utils/getMoviesWithQuery'
 import TopBar from '../../modules/TopBar/TopBar'
 import TypeHeader from '../../modules/TypeHeader/TypeHeader'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import GlobalLoader from '../../modules/GlobalLoader/GlobalLoader'
+import Loader from '../../components/Loader/Loader'
+import Svg from '../../components/Svg/Svg'
+import {iconSearch} from '../../assets/svg/svg'
 
 interface SearchViewProps {
   movies: object[],
@@ -41,20 +43,22 @@ const SearchView: React.FC<SearchViewProps> = ({
   }
 
   useEffect(() => {
-    (async () => {
-      // @ts-ignore
-      setPageNumberAction(1)
-      await getMoviesWithQuery(query, pageNumber)
-        .then(({ data }) => {
-          setTotalResultsAction(data.totalResults)
-          setSearchedMoviesAction(data.Search)
-        })
-        .finally(() => {
-          // @ts-ignore
-          setPageNumberAction(pageNumber + 1)
-          // @ts-ignore
-          setIsLoadingAction(false)
-        })})();
+    if (!movies || movies.length === 0) {
+      (async () => {
+        // @ts-ignore
+        setPageNumberAction(1)
+        await getMoviesWithQuery(query, pageNumber)
+          .then(({ data }) => {
+            setTotalResultsAction(data.totalResults)
+            setSearchedMoviesAction(data.Search)
+          })
+          .finally(() => {
+            // @ts-ignore
+            setPageNumberAction(pageNumber + 1)
+            // @ts-ignore
+            setIsLoadingAction(false)
+          })})();
+    }
   }, [ // eslint-disable-line react-hooks/exhaustive-deps
     setIsLoadingAction,
     setPageNumberAction,
@@ -71,25 +75,35 @@ const SearchView: React.FC<SearchViewProps> = ({
       .then(({ data }) => setSearchedMoviesAction([...movies, ...data.Search]))
   }
 
+  // @ts-ignore
   return (
     <>
       <TopBar />
       <div className={styles.root}>
+        <TypeHeader
+          title="Your Movies"
+          subtitle="Below you can find the movies that came back from your search"
+        />
         {movies ? (
           <>
-            <TypeHeader />
             <InfiniteScroll
               dataLength={movies.length}
               next={fetchMoreData}
               hasMore={true}
-              loader={<GlobalLoader />}
-              endMessage={<h4>This is the end</h4>}
+              loader={<Loader />}
+              endMessage={<h4>All movies have been loaded.</h4>}
             >
+              {/*// @ts-ignore*/}
               <MovieList movies={movies} />
             </InfiniteScroll>
           </>
         ) : (
-          <div>No movies under this query. Try again!</div>
+          <div className={styles.empty}>
+            <Svg icon={iconSearch} size={5} svgClassName={styles.svg}/>
+            <div>
+              No movies found under this query. Try again with another one! :)
+            </div>
+          </div>
         )}
       </div>
     </>
@@ -113,5 +127,4 @@ const mapsDispatchToProps = {
   setTotalResultsAction: setTotalResults,
 }
 
-// @ts-ignore
 export default connect(mapStateToProps, mapsDispatchToProps)(SearchView)

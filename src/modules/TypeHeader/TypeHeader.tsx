@@ -2,14 +2,22 @@ import React from 'react'
 
 import styles from './TypeHeader.module.scss'
 
-const TypeHeader = () => {
+interface TypeHeaderProps {
+  title: string,
+  subtitle?: string,
+}
+
+const TypeHeader: React.FC<TypeHeaderProps> = ({
+  title,
+  subtitle,
+}) => {
   return (
     <div className={styles.root}>
       <div className={styles.title}>
-        Your Movies
+        {title}
       </div>
       <div className={styles.subtitle}>
-        Below you can find the movies that came back from your search
+        {subtitle}
       </div>
     </div>
   )

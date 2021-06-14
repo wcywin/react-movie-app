@@ -1,14 +1,14 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import {connect, MapStateToProps} from 'react-redux'
 import Loader from '../../components/Loader/Loader'
 import styles from './GlobalLoader.module.scss'
 
-interface GlobalLoaderProps {
-  isLoading: boolean,
+interface GlobalLoaderStateProps {
+  isLoading: MapStateToProps<boolean, boolean>,
 }
 
 // @ts-ignore
-const GlobalLoader: React.FC<GlobalLoaderProps> = ({
+const GlobalLoader: React.FC<GlobalLoaderStateProps> = ({
   isLoading,
 }) => {
   if (!isLoading) {

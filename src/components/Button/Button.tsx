@@ -1,12 +1,12 @@
 import React from 'react'
 
-import styles from './BaseButton.module.scss'
+import styles from './Button.module.scss'
 
-type BaseButtonProps = {
+type ButtonProps = {
   color?: string
 }
 
-const BaseButton: React.FC<BaseButtonProps> = ({ color, children}) => {
+const Button: React.FC<ButtonProps> = ({ color, children}) => {
   return (
     <div className={styles.root}>
       <div
@@ -20,4 +20,4 @@ const BaseButton: React.FC<BaseButtonProps> = ({ color, children}) => {
   )
 }
 
-export default BaseButton
+export default Button

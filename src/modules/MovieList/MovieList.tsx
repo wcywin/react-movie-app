@@ -1,9 +1,10 @@
 import React from 'react'
 import styles from './MovieList.module.scss'
 import MovieItem from '../MovieItem/MovieItem'
+import { Movie } from '../../types'
 
 interface MovieListProps {
-  movies: object[]
+  movies: Movie[]
 }
 
 const MovieList: React.FC<MovieListProps> = ({
@@ -14,15 +15,10 @@ const MovieList: React.FC<MovieListProps> = ({
       {movies.map(movie => {
         return (
           <MovieItem
-            // @ts-ignore
             key={movie.imdbID}
-            // @ts-ignore
             id={movie.imdbID}
-            // @ts-ignore
             posterUrl={movie.Poster}
-            // @ts-ignore
             title={movie.Title}
-            // @ts-ignore
             year={movie.Year}
           />
         )

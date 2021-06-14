@@ -3,7 +3,7 @@ import React from 'react'
 interface SvgProps {
   icon: any,
   size: number,
-  svgClassName: string,
+  svgClassName?: string,
 }
 
 const Svg: React.FC<SvgProps> = ({
