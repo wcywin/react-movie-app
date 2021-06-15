@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Anastasiia Movies App",
+  "name": "React with Typescript Movie App based on omdb api",
   "icons": [
     {
       "src": "favicon.ico",

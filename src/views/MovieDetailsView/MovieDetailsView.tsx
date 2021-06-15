@@ -36,7 +36,7 @@ const MovieDetailsView: React.FC<MovieDetailsViewDispatchProps> = ({
         // @ts-ignore
         setIsLoadingAction(true)
         await getMovieDetails(id)
-          .then(({data}) => setMovieDetailsAction(data))
+          .then(({ data }) => setMovieDetailsAction(data))
           // @ts-ignore
           .finally(() => setIsLoadingAction(false))
       })()
@@ -114,7 +114,7 @@ const MovieDetailsView: React.FC<MovieDetailsViewDispatchProps> = ({
               ))}
             </div>
             <div className={styles.footer}>
-              {new Date().getFullYear()} Copyright &copy; Anastasiia Movie App
+              {new Date().getFullYear()} Copyright &copy; Anastasiia Movies App
             </div>
           </div>
         </>

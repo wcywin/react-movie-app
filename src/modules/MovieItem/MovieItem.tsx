@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Svg from '../../components/Svg/Svg'
+import getSlugFromTitle from '../../utils/getSlugFromTitle'
+import { iconStar } from '../../assets/svg/svg'
 
 import styles from './MovieItem.module.scss'
-import Svg from '../../components/Svg/Svg'
-
-import { iconStar } from '../../assets/svg/svg'
 
 interface MovieItemProps {
   id: string,
@@ -15,12 +15,6 @@ interface MovieItemProps {
 
 const starsArray = [1, 2, 3, 4, 5];
 
-const createSlugFromTitle = (movieTitle: string) => movieTitle
-  .toLowerCase()
-  .replace(/[,.-]/g, '')
-  .split(' ')
-  .join('-')
-
 const MovieItem: React.FC<MovieItemProps> = ({
   id,
   posterUrl,
@@ -29,7 +23,7 @@ const MovieItem: React.FC<MovieItemProps> = ({
 }) => (
   <Link
     className={styles.root}
-    to={`/movie/${id}/details/${createSlugFromTitle(title)}`}
+    to={`/movie/${id}/details/${getSlugFromTitle(title)}`}
   >
     <img
       className={styles.image}
