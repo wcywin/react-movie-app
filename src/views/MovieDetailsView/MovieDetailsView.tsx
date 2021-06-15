@@ -31,6 +31,10 @@ const MovieDetailsView: React.FC<MovieDetailsViewDispatchProps> = ({
   const { id } = useParams()
 
   useEffect(() => {
+    window.scrollTo(0,0)
+  }, [])
+
+  useEffect(() => {
     if (id !== (movieDetails && movieDetails.imdbID)) {
       (async () => {
         // @ts-ignore
