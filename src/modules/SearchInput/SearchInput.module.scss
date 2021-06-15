@@ -3,6 +3,7 @@
 .root {
   position: relative;
   width: 100%;
+  display: flex;
 }
 
 .input {
@@ -27,12 +28,7 @@
   }
 
   @media #{$tablet-768-up} {
-    width: 28rem;
     padding: 0.4rem 2rem 0.4rem 5rem;
-  }
-
-  @media #{$desktop-1024-up} {
-    width: 33rem;
   }
 }
 
